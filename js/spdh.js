@@ -116,7 +116,7 @@ function header(dataHeader){
                 flags + "<br>" +
                 responseCode + "<br>";
 
-    alert(header);
+    //alert(header);
     return (header);
 
 

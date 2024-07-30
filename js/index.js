@@ -83,7 +83,16 @@ function desglosarComando(){
         desgRespSaleVoid0810(dataInputSp);
         return true;
     }
+
+    if (dataInputSp[0] == "0900"){
+        desgReqValAut0900(dataInputSp);
+        return true;
+    }
     
+    if (dataInputSp[0] == "0910"){
+        desgRespValAut0900(dataInputSp);
+        return true;
+    }
 
     if (dataInputSp[0] != ""){
         alert("No es posible procesar el mensaje ingresado!!!!\nMensaje:\n" + dataInputSp[0]);

@@ -566,10 +566,6 @@ function desgReqSaleVoid0800(dataInputSp){
         "Glosa 4 confirma monto",
         "Indicador solicitud de autentificación",
         ""
-
-
-        
-
     ];
 
     let descripcion = ["comando Requerimiento Venta/Anulación, CAJA -> PINPAD",
@@ -591,7 +587,6 @@ function desgReqSaleVoid0800(dataInputSp){
     addRegSolicitud(nombre,descripcion,dataInputSp);
 
 }
-
 
 /* ************************************************************************************************** */
 /* Response aComando requerimiento venta/anulación*/ 
@@ -617,7 +612,7 @@ function desgRespSaleVoid0810(dataInputSp){
     ];
 
 
-    let descripcion = ["Comando Validación actualización parámetros pinpad (cierre batch), CAJA <- PINPAD",
+    let descripcion = ["comando Requerimiento Venta/Anulación, CAJA <- PINPAD",
         "Valor numérico En caso de rechazo se debe desplegar en el punto de venta: RECHAZO PINPAD - <XX> : <GLOSA> De acuerdo a Tabla de códigos de respuesta decomandos",
         "Valor alfanumérico Formato aaaammddhhmmssmm Es solo un ID, la fecha y hora en el pinpad puede estar desactualizada",
         "Valor Numérico |00| : B - Banda |01| : E . EMV c/contacto |02| : C - Contacless |03| : F - Fallback",
@@ -635,3 +630,48 @@ function desgRespSaleVoid0810(dataInputSp){
     addRegRespuesta(nombre,descripcion,dataInputSp);
 }
 
+/* ************************************************************************************************** */
+/* Solicitud Sale or void 0900*/ 
+/* ************************************************************************************************** */ 
+function desgReqValAut0900(dataInputSp){
+    let nombre = ["Comando",
+        "Indicador de contexto comando",
+        "Flag valida criptograma",
+        "Glosa respuesta",
+        "Valor alfanumérico (máximo) Sólo si “Flag valida criptograma = N” Ejemplo: Aprobado / Rechazado / Reintente",
+        "Criptograma",
+        ""
+    ];
+
+    let descripcion = ["Comando validación de respuesta autorizador, CAJA -> PINPAD",
+        "Valor alfanumérico (opcional) Formato aaaammddhhmmssmm Es solo un ID, la fecha y hora en el pinpad puede estar desactualizada Si este comando proviene de otro y es parte de la misa transacción se debe mantener el ID",
+        "Valor alfanumérico |Y| Validar criptograma |N| No validar criptograma Solo aplica para transacciones con chip con contacto",
+        "Valor alfanumérico (máximo) Sólo si “Flag valida criptograma = N” Ejemplo: Aprobado / Rechazado / Reintente",
+        "Formato TLV ISO Sólo si “Flag valida criptograma = Y” Este criptograma el pinpad entrega al chip de la tarjeta para validación. Podría resultar en una transacción declinada por la tarjeta para lo cual la caja debe solicitar reversa al autorizador ONUS",
+        ""
+    ];
+    addRegSolicitud(nombre,descripcion,dataInputSp);
+
+}
+
+/* ************************************************************************************************** */
+/* Response Comando validación de respuesta autorizador*/ 
+
+/* ************************************************************************************************** */ 
+function desgRespValAut0900(dataInputSp){
+    
+    let nombre = ["Comando",
+        "Código respuesta",
+        "Glosa respuesta",
+        ""
+
+    ];
+
+
+    let descripcion = ["Comando validación de respuesta autorizador, CAJA <- PINPAD",
+        "Valor numérico En caso de rechazo se debe desplegar en el punto de venta: RECHAZO PINPAD - <XX> : <GLOSA> De acuerdo a Tabla de códigos de respuesta decomandos",
+        "Valor alfanumérico (máximo) De acuerdo a Tabla de códigos de respuesta de comandos. Sólo si “Flag valida criptograma = Y”",
+        
+    ];
+    addRegRespuesta(nombre,descripcion,dataInputSp);
+}

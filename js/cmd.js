@@ -547,3 +547,91 @@ function desgRespValActParamCierre(dataInputSp){
     ];
     addRegRespuesta(nombre,descripcion,dataInputSp);
 }
+/* ************************************************************************************************** */
+/* Solicitud Sale or void 0800*/ 
+/* ************************************************************************************************** */ 
+function desgReqSaleVoid0800(dataInputSp){
+    let nombre = ["Comando",
+        "Indicador de contexto comando",
+        "Local comercio OnUs",
+        "Working key track",
+        "Working key PIN",
+        "Monto",
+        "Lista montos de vuelto",
+        "Monto vuelto",
+        "Flag solicita confirma monto",
+        "Glosa 1 confirma monto",
+        "Glosa 2 confirma monto",
+        "Glosa 3 confirma monto",
+        "Glosa 4 confirma monto",
+        "Indicador solicitud de autentificación",
+        ""
+
+
+        
+
+    ];
+
+    let descripcion = ["comando Requerimiento Venta/Anulación, CAJA -> PINPAD",
+        "Valor alfanumérico (opcional) Formato aaaammddhhmmssmm Es solo un ID, la fecha y hora en el pinpad puede estar desactualizada Si este comando proviene de otro y es parte de la misa transacción se debe mantener el ID",
+        "Valor numérico (obligatorio) (00 -> 99)Cada local onus tiene su ID definido",
+        "Valor alfanumérico (opcional) Contiene la llave 3DES utilizada para encriptar el TRACK (ø: no encripta)",
+        "Valor alfanumérico (opcional) Contiene la llave 3DES utilizada para encriptar el TRACK (ø: no encripta)",
+        "Valor numérico (obligatorio) (incluye dos decimales) Largo variable",
+        "Valor alfanumérico (opcional) Campo no utilizado por el momento enviar vacío Largo variable",
+        "Valor numérico (opcional) |0| Transacción sin vuelto Campo no utilizado por el momento enviar cero Largo variable",
+        "Valor alfanumérico (obligatorio) |Y| Solicitar confirmar monto |N| No solicitar confirmar monto",
+        "Valor alfanumérico (opcional) Sólo si “Solicita confirma monto = Y” Largo variable",
+        "Valor alfanumérico (opcional) Sólo si “Solicita confirma monto = Y” Largo variable",
+        "Valor alfanumérico (opcional) Sólo si “Solicita confirma monto = Y” Largo variable",
+        "Valor alfanumérico (opcional) Sólo si “Solicita confirma monto = Y” Largo variable",
+        "Valor numérico (obligatorio) |00| Pide PIN a todo evento |01| No pide PIN a menos que la tarjeta EMV lo indique |02| Pide PIN según código de servicio |03| Pide PIN según código de servicio, pero acepta pin nulo |04| No pide PIN nunca",
+        ""
+    ];
+    addRegSolicitud(nombre,descripcion,dataInputSp);
+
+}
+
+
+/* ************************************************************************************************** */
+/* Response aComando requerimiento venta/anulación*/ 
+
+/* ************************************************************************************************** */ 
+function desgRespSaleVoid0810(dataInputSp){
+    
+    let nombre = ["Comando",
+        "Código respuesta",
+        "Indicador de contexto",
+        "Tipo de captura",
+        "TRACK I",        
+        "TRACK II",
+        "BIN",
+        "4 últimos dígitos",
+        "Nombre tarjetahabiente",
+        "Nombre marca de la tarjeta",
+        "Abreviación de la tarjeta",
+        "Pinblock",
+        "Criptograma",
+        ""
+
+    ];
+
+
+    let descripcion = ["Comando Validación actualización parámetros pinpad (cierre batch), CAJA <- PINPAD",
+        "Valor numérico En caso de rechazo se debe desplegar en el punto de venta: RECHAZO PINPAD - <XX> : <GLOSA> De acuerdo a Tabla de códigos de respuesta decomandos",
+        "Valor alfanumérico Formato aaaammddhhmmssmm Es solo un ID, la fecha y hora en el pinpad puede estar desactualizada",
+        "Valor Numérico |00| : B - Banda |01| : E . EMV c/contacto |02| : C - Contacless |03| : F - Fallback",
+        "Valor alfanumérico Este campo es opcional, por lo tanto puede contener datos o estar vacío. Si existen datos y es necesario se rellena con blancos (0x20) a la derecha Con pan encriptado se entrega 160 caracteres alfanuméricos que corresponde a 80 HEXA - Si el pinpad no logra leer un track1, este campo irá vacío. - Si el pinpad lee datos erróneos en el track1, este campo irá vacío. - Si se excede el largo máximo, este campo irá vacío.",
+        "Valor alfanumérico (máximo) El track2 es un valor requerido para cualquier venta, por lo tanto si no se logra leer o se lee errores, se entrega un error de lectura al comando. Si se obtiene correctamente el dato desde la tarjeta, se rellena con blancos (0x20) a la derecha si es necesario y se entrega. Con pan encriptado se entrega 80 caracteres alfanuméricos que corresponde a 40 HEXA",
+        "Valor numérico Seis primeros dígitos de la tarjeta",
+        "Valor numérico Cuatro últimos dígitos de la tarjeta",
+        "Valor alfanumérico Este dato se obtiene desde el track1, por lo tanto si no existe el track1, no se entrega el nombre del tarjetahabiente Largo variable",
+        "Valor alfanumérico De acuerdo a Tabla de marcas Largo variable",
+        "Valor alfanumérico De acuerdo a Tabla de marcas",
+        "Valor alfanumérico PIN ingresado por el cliente pero encriptado con las llaves proporcionadas por la caja",
+        "Valor alfanumérico Formato TLV ISO Contiene TAG y criptograma requerido por el emisor para autorizar transacciones realizadas con tecnología y seguridad EMV Largo variable",
+        ""
+    ];
+    addRegRespuesta(nombre,descripcion,dataInputSp);
+}
+

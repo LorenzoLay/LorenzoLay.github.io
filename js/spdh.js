@@ -6,7 +6,7 @@
 function descriptionSPH(nombre){
    
     const tableDescription = [
-        ["A", "Campo A"],
+        ["A", "Carga remota HOST"],
         ["B", "Monto Total"],
         ["C", "Monto Vuelto"],
         ["D", "Tipo Cuenta"],
@@ -19,7 +19,7 @@ function descriptionSPH(nombre){
         ["Q", "Datos de contexto"],
         ["S", "Numero de Boleta, en ventas, Estadística de comunicaciones I, en cierre batch AO60"],
         ["T", "Numero de empleado, en ventas, Estadística de comunicaciones II, en cierre batch AO60"],
-        ["F", "Cuotas"],
+        ["W", "Cuotas"],
         ["a", "Datos Transbank"],
         ["b", "PIN block"],
         ["d", "Retail ID"],
@@ -56,6 +56,78 @@ function descriptionSPH(nombre){
 
    
 }
+function header(dataHeader){
+    tpdu = dataHeader.substring(0,5);
+
+    let index = dataHeader.indexOf(".");
+
+    if (index == -1)
+        return " ";
+    let TPDU = "";
+    if (index == 6){
+        TPDU = "TPDU: " +  dataHeader.substring(0,5);
+    }
+
+   
+    index = index - 1;
+    let deviceType = "Device Type: " + dataHeader.substring(index,index + 2);
+    index = index + 2;
+
+    
+
+    //alert("device type:" + deviceType);
+    let transmisionNumber = "Trasmision number: " + dataHeader.substring(index, index + 2);
+    index = index + 2;
+
+    let terminalID = "Terminal id: " + dataHeader.substring(index, index + 16);
+    index = index + 16;
+
+    let employe= "Empleado: " + dataHeader.substring(index, index + 6);
+    index = index + 6;
+
+    let currentDate = "Fecha actual: " + dataHeader.substring(index, index + 6);
+    index = index + 6;
+
+    let currentTime = "Hora actual: " + dataHeader.substring(index, index + 6);
+    index = index + 6;
+
+    let messageType = "Message Type: " + dataHeader.substring(index, index + 1);
+    index = index + 1;
+
+    let messageSubType = "Message Subtype: " + dataHeader.substring(index, index + 1);
+    index = index + 1;
+
+    let transactionCode = "Transaction Code: " + dataHeader.substring(index, index + 2);
+    index = index +2;
+
+    let flags = "Flags: " + dataHeader.substring(index, index + 3);
+    index = index + 3;
+
+    let responseCode = "Response code: " + dataHeader.substring(index, index + 3);
+
+    let header = TPDU + "<br>" +
+                deviceType + "<br>" +
+                transmisionNumber + "<br>" + 
+                terminalID + "<br>" +
+                employe + "<br>" +
+                currentDate + "<br>" + 
+                currentTime + "<br>" +
+                messageType + "<br>" +
+                messageSubType + "<br>" +
+                transactionCode + "<br>" +
+                flags + "<br>" +
+                responseCode + "<br>";
+
+    alert(header);
+    return (header);
+
+
+
+
+
+
+
+}
 /* SPDH*/ 
 function desSPDH(dataInputHexSp){
     let tableBody = document.getElementById("tbody");
@@ -79,7 +151,7 @@ function desSPDH(dataInputHexSp){
             val0 = `<td class="table-td__0 c_spdh">${i} </td>`;
             val1 = `<td class="table-td__1 c_spdh">HEADER</td>`;
             val2 = `<td class="table-td__2 c_spdh">${tb_valor.substring(0)}</td>`;
-            val3 = `<td class="table-td__3 c_spdh">Campo A </td>`;
+            val3 = `<td class="table-td__3 c_spdh">${header(tb_valor.substring(0))}</td>`;
         }else if ((i%2) == 0 ){
          
             val0 = `<td class="table-td__0 celColor1">${i} </td>`;

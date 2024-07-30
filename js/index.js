@@ -18,26 +18,66 @@ function desglosarComando(){
 
     
     let dataInputSp = dataInputAux.split("|");
-    alert(dataInputSp[0]);
+    //alert(dataInputSp[0]);
 
     if ((dataInputSp[0] == "0100") || (dataInputSp[0] == "0120")){
         desgReadCard(dataInputSp);
-        return;
+        return true;
     }
     
     if ((dataInputSp[0] == "0110") || (dataInputSp[0] == "0130")){
         desgRespReadCard(dataInputSp);
-        return;
+        return true;
     }
     if (dataInputSp[0] == "0200"){
         desgReqSaleVoid(dataInputSp);
-        return;
+        return true;
     }
     if (dataInputSp[0] == "0210"){
         desgRespSaleVoid(dataInputSp);
-        return;
+        return true;
     }
-    alert(dataInputSp[0]) + "no disponible!!!";
+
+    if (dataInputSp[0] == "0400"){
+        desgReqReverse(dataInputSp);
+        return true;
+    }
+    if (dataInputSp[0] == "0410"){
+        desgRespReverse(dataInputSp);
+        return true;
+    }
+    if ( (dataInputSp[0] == "0500") || (dataInputSp[0] == "0540") ){
+        desgReqValUpgrade(dataInputSp);
+        return true;
+    }
+    if ( (dataInputSp[0] == "0510") || (dataInputSp[0] == "0550")){
+        desgRespValUpgrade(dataInputSp);
+        return true;
+    }
+
+    if (dataInputSp[0] == "0600"){
+        desgReqActParamCierre(dataInputSp);
+        return true;
+    }
+
+    if (dataInputSp[0] == "0610"){
+        desgRespActParamCierre(dataInputSp);
+        return true;
+    }
+
+    if (dataInputSp[0] == "0700"){
+        desgReqValActParamCierre(dataInputSp);
+        return true;
+    }
+
+    if (dataInputSp[0] == "0710"){
+        desgRespVActParamCierre(dataInputSp);
+        return true;
+    }
+    if (dataInputSp[0] != ""){
+        alert("No es posible procesar el mensaje ingresado!!!!\nMensaje:\n" + dataInputSp[0]);
+    }
+    return true;
     
     
 }
@@ -49,6 +89,13 @@ function desglosarSpdh(){
     const H1C = d1c.toString(16);
 
     const dataInput = document.getElementById("data").value;
+
+    let index = dataInput.indexOf(".");
+    if (index == -1){
+        alert("No es posible procesar el mensaje ingresado!!!!\nMensaje:\n" + dataInput);
+        return true;
+    }
+
     let dataInputAux = dataInput.replace("\n", "");
     let dataInputHex = convertToHex(dataInputAux);
     let dataInputHexSp = dataInputHex.split(H1C);

@@ -455,6 +455,7 @@ function desgRespValUpgrade(dataInputSp){
 /* ************************************************************************************************** */
 /* Command actualización parámetros pinpad (cierre batch)*/
 /* Solicitud comando actualización parámetros pinpad */ 
+//0610
 /* ************************************************************************************************** */ 
 function desgReqActParamCierre(dataInputSp){
     //let tableBody = document.getElementById("tbody");

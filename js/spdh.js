@@ -57,8 +57,6 @@ function descriptionSPH(nombre){
    
 }
 function header(dataHeader){
-    tpdu = dataHeader.substring(0,5);
-
     let index = dataHeader.indexOf(".");
 
     if (index == -1)
